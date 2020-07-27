@@ -15,26 +15,52 @@
     <script crossarigin src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 
     <script type="text/babel">
-        class Shots extends React.Component {
-            constructor(props) {
-                super(props)
+        class Team extends React.Component {
+            constructor(props) {            super(props)
                 this.state = {
-                    score1: 0,
-                    score2: 0,
-                    resets: 0,
+            shots: 0,
+            score: 0
                 }
-
-            }
-
-            render() {
-                return (<div>
-                    <button>team1</button>
-                    <button>team2</button>
-                    <button>reset</button>
-                </div>)
-            }
         }
+        shotHandler = () => {
+            this.setstate((state, props) => ({
+                shots: state.shots + 1
+            }))
+        }
+
+
+        render(){
+            return (
+                <div className="Team">
+                    <h2>{this.props.name}</h2>
+                    <div className="identity">
+                        <img src={this.props.logo} alt={this.props.name} />
+                    </div>
+                    <div>
+                    <strong>Shots:</strong> {this.state.shots}
+                    </div>
+                    <div>
+                    <strong>Score:</strong> {this.state.score}
+                    </div>
+                    <button onclick={this.shotHandler}>Shoot!</button>
+                    
+                </div>
+            )
+        }
+
+            }
+        function App(props) {
+            return (
+                <div className="App">
+                    <Team name="Columbus Knights"
+                        logo="images\Knights.png" />
+
+                </div>
+            )
+        }
+
         ReactDOM.render(
+            <App />,
             document.getElementById('root')
         )
 
